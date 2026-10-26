@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5ef">
+  <title>BILLWAIS | Household utility tracker</title>
+  <link rel="stylesheet" href="styles.css?v=bill-form-2">
+  <script src="app.js?v=ocrspace-1" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></symbol>
+    <symbol id="icon-archive" viewBox="0 0 24 24"><path d="M4 4h16v5H4z"/><path d="M5 9v11h14V9"/><path d="M9 13h6"/><path d="M9 16h6"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h17"/><path d="m7 15 4-4 3 2 6-7"/></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10z"/><path d="M13 3v7h7"/><path d="M8 14h8M8 17h8"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-water" viewBox="0 0 24 24"><path d="M12 3s7 7.1 7 12a7 7 0 0 1-14 0c0-4.9 7-12 7-12z"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-13h-7z"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-warning" viewBox="0 0 24 24"><path d="M10.3 4.3 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 14h12l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#view-overview" data-view="overview" aria-label="BillWais overview">
+        <span class="logo-slot" aria-label="BillWais logo">
+          <img src="assets/BILLWAIS%202.png" alt="BillWais logo" class="logo-image">
+        </span>
+        <span class="brand-copy"><strong>BILLWAIS</strong><small>HOUSEHOLD UTILITIES</small></span>
+      </a>
+      <div class="home-label">YOUR HOUSEHOLD</div>
+      <div class="household-switch"><span><strong>Home in Albay</strong><small>Personal account</small></span></div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="overview" type="button"><svg class="icon nav-icon" aria-hidden="true"><use href="#icon-home"/></svg>Overview</button>
+        <button class="nav-link" data-view="records" type="button"><svg class="icon nav-icon" aria-hidden="true"><use href="#icon-archive"/></svg>Bill &amp; receipt archive</button>
+        <button class="nav-link" data-view="insights" type="button"><svg class="icon nav-icon" aria-hidden="true"><use href="#icon-chart"/></svg>Usage insights</button>
+        <button class="nav-link" data-view="letters" type="button"><svg class="icon nav-icon" aria-hidden="true"><use href="#icon-file"/></svg>Concern letters<span class="nav-count" id="letter-count">0</span></button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="privacy-note"><span class="privacy-icon"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></span><div><strong>Your records stay here</strong><p>This demo saves data in this browser only. It is not an official billing platform.</p></div></div>
+      <div class="sidebar-footer">BUILT FOR HOUSEHOLDS IN ALBAY</div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Household</span><span class="crumb-sep">/</span><strong id="page-crumb">Overview</strong></div>
+        <div class="top-actions"><span class="local-status"><i></i> Saved on this device</span><button class="button button-dark button-add" id="add-bill-top" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg> Add a bill</button></div>
+      </header>
+
+      <section class="view-panel active" id="view-overview">
+        <div class="page-heading"><div><p class="eyebrow">TODAY · <span id="today-date"></span><span class="eyebrow-dot">•</span> ALBAY, BICOL</p><h1>Good morning, household.</h1><p class="page-subtitle">Your utility picture, all in one place.</p></div><button class="button button-outline" id="add-record-overview" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg> Add record</button></div>
+        <div class="summary-grid" id="summary-grid"></div>
+        <div class="dashboard-grid">
+          <section class="panel trend-panel">
+            <div class="chart-panel-heading"><p class="eyebrow">SPENDING OVER TIME</p><h2>Monthly utility trend</h2><p class="chart-subtitle">Compare monthly charges or recorded consumption.</p></div>
+            <div class="chart-controls" role="group" aria-label="Utility trend metric">
+              <button class="chart-mode active" id="chart-mode-spend" data-chart-mode="spend" type="button" aria-pressed="true">Spend</button>
+              <button class="chart-mode" id="chart-mode-electricity" data-chart-mode="electricity" type="button" aria-pressed="false">Electricity</button>
+              <button class="chart-mode" id="chart-mode-water" data-chart-mode="water" type="button" aria-pressed="false">Water</button>
+            </div>
+            <div class="chart-wrap"><div id="chart-y-labels" class="chart-y-labels" aria-hidden="true"></div><div class="chart-main"><div class="chart-plot"><div id="chart-grid-lines" class="chart-grid-lines" aria-hidden="true"></div><div id="monthly-chart" class="monthly-chart" role="img" aria-label="Monthly utility spending trend"></div></div><div id="chart-months" class="chart-months" aria-hidden="true"></div></div></div>
+            <div id="chart-legend" class="chart-legend" aria-hidden="true"></div>
+            <p class="chart-caption">Only saved records are included.</p>
+          </section>
+          <section class="panel alert-panel" id="alert-panel"></section>
+          <section class="panel recent-panel"><div class="panel-heading"><div><p class="eyebrow">YOUR LATEST RECORDS</p><h2>Recent bills</h2></div><button class="text-button" data-go="records" type="button">View archive <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button></div><div id="recent-records" class="record-list"></div></section>
+          <section class="panel tip-panel"><div class="tip-topline"><p class="eyebrow">SMALL CHANGE, REAL SAVINGS</p></div><h2 id="tip-title">A little less standby.</h2><p id="tip-copy">Unplug chargers and switch off appliances at the outlet when not in use. Standby loads can add to your monthly electricity use.</p><div class="tip-footer"><span>ENERGY-SAVING IDEA</span></div></section>
+        </div>
+        <p class="disclaimer-line">BillWais highlights changes for your review. A flag is not confirmation of a billing error; please verify details with your provider.</p>
+      </section>
+
+      <section class="view-panel" id="view-records">
+        <div class="page-heading"><div><p class="eyebrow">YOUR HOUSEHOLD FILE</p><h1>Bills &amp; receipts</h1><p class="page-subtitle">Keep utility records and payment documents together.</p></div><button class="button button-dark" id="add-record-archive" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg> Add a record</button></div>
+        <div class="archive-toolbar"><div class="filter-tabs" role="group" aria-label="Filter records"><button class="filter-tab active" data-filter="all" type="button">All records</button><button class="filter-tab" data-filter="electricity" type="button">Electricity</button><button class="filter-tab" data-filter="water" type="button">Water</button><button class="filter-tab" data-filter="receipt" type="button">Receipts</button></div><label class="search-box"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg><input id="record-search" type="search" placeholder="Search provider or period" aria-label="Search records"></label></div>
+        <section class="panel archive-panel"><div class="archive-table-wrap"><table><thead><tr><th>RECORD</th><th>PROVIDER</th><th>BILLING PERIOD</th><th>AMOUNT</th><th>DOCUMENT</th><th></th></tr></thead><tbody id="archive-rows"></tbody></table></div><div id="archive-empty" class="empty-state" hidden><h2>No records found</h2><p>Add a bill or receipt to start building your archive.</p></div></section>
+        <p class="disclaimer-line">Files and entries are saved locally in this browser for demo purposes. Avoid using sensitive account details on a shared device.</p>
+      </section>
+
+      <section class="view-panel" id="view-insights">
+        <div class="page-heading"><div><p class="eyebrow">COMPARE MONTHS</p><h1>Usage insights</h1><p class="page-subtitle">How each billing period stacks up against the one before it, so an unusual change stands out.</p></div><button class="button button-outline" data-go="records" type="button">View all records <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button></div>
+        <div class="insight-grid" id="insight-grid"></div>
+        <section class="panel recommendations-panel"><div class="panel-heading"><div><p class="eyebrow">SAVING TIPS</p><h2>Practical changes for a household in Albay</h2></div><span class="recommendation-tag">Based on what your own bills show</span></div><div class="recommendation-list" id="recommendations"></div></section>
+        <p class="disclaimer-line">Recommendations are general suggestions, not guaranteed savings. Estimated changes depend on household habits, appliance efficiency, and provider rates.</p>
+      </section>
+
+      <section class="view-panel" id="view-letters">
+        <div class="page-heading"><div><p class="eyebrow">WRITE TO YOUR PROVIDER</p><h1>Concern letters</h1><p class="page-subtitle">A month that rose past your threshold is worth a written question. BillWais drafts the letter from your own figures, and you edit it before sending.</p></div></div>
+        <div class="letter-intro"><span class="letter-mark"><svg class="icon" aria-hidden="true"><use href="#icon-file"/></svg></span><div><strong>Drafts are yours to review.</strong><p>BillWais can prepare a letter when a recorded bill shows an unusual change. Confirm every detail and attach supporting records before sending.</p></div></div>
+        <section class="panel letters-panel" id="letter-list"></section>
+        <p class="disclaimer-line">BillWais does not submit complaints on your behalf and does not determine whether a bill is incorrect.</p>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="record-dialog" class="modal">
+    <form id="record-form" class="modal-form">
+      <div class="modal-heading"><div><p class="eyebrow">BUILD YOUR LOCAL ARCHIVE</p><h2 id="record-form-title">Add a record</h2></div><button class="icon-button" type="button" data-close="record-dialog" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div>
+      <p class="page-subtitle record-form-intro" id="record-form-intro">Enter the details shown on your bill, or attach a copy to read it locally.</p>
+      <div class="form-grid">
+        <label class="field"><span>Record type</span><select name="kind" id="record-kind"><option value="bill">Utility bill</option><option value="receipt">Payment receipt</option></select></label>
+        <div class="field"><span>Utility</span><div class="utility-switch" role="group" aria-label="Utility"><button class="utility-choice active" type="button" data-utility="electricity" aria-pressed="true">Electricity</button><button class="utility-choice" type="button" data-utility="water" aria-pressed="false">Water</button></div><input name="utility" type="hidden" value="electricity"></div>
+        <label class="field field-wide"><span>Provider</span><input name="provider" maxlength="80" placeholder="e.g. ALECO" required></label>
+        <label class="field"><span id="period-label">Billing month</span><input name="period" type="month" required></label>
+        <label class="field"><span id="amount-label">Amount due (₱)</span><input name="amount" type="number" min="0" step="0.01" placeholder="0.00" required></label>
+      </div>
+      <section class="bill-only-details" id="bill-only-details">
+        <div class="detail-section-heading"><h3>Bill details</h3><span>Check against your statement</span></div>
+        <div class="form-grid">
+          <label class="field"><span>Account / meter number</span><input name="account" maxlength="48" placeholder="Optional"></label>
+          <label class="field"><span>Payment due date</span><input name="dueDate" type="date"></label>
+          <label class="field"><span>Period start</span><input name="periodStart" type="date"></label>
+          <label class="field"><span>Period end</span><input name="periodEnd" type="date"></label>
+        </div>
+        <div class="reading-fields">
+          <label class="field"><span>Previous reading</span><input name="previousReading" type="number" min="0" step="0.01" placeholder="Optional"></label>
+          <label class="field"><span>Present reading</span><input name="presentReading" type="number" min="0" step="0.01" placeholder="Optional"></label>
+          <label class="field" id="consumption-field"><span>Consumption (<span id="unit-label">kWh</span>)</span><input name="consumption" type="number" min="0" step="0.01" placeholder="Optional"></label>
+        </div>
+        <div class="charge-editor">
+          <div class="detail-section-heading"><h3>Charge lines printed on the bill</h3><button class="button button-outline charge-add" id="add-charge" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg> Add a charge line</button></div>
+          <div class="charge-lines" id="charge-lines"></div>
+        </div>
+      </section>
+      <label class="field field-wide notes-field"><span>Your own notes</span><textarea name="notes" rows="3" placeholder="For example: paid at the barangay collection point."></textarea></label>
+      <label class="field field-wide attachment-field"><span>Attach bill or receipt <small>Optional, up to 1 MB</small></span><input name="file" id="bill-file" type="file" accept=".pdf,image/jpeg,image/png,image/gif,image/tiff,image/bmp"></label>
+      <div class="ocr-tools" id="ocr-tools"><button class="button button-outline" id="read-bill" type="button" disabled><svg class="icon" aria-hidden="true"><use href="#icon-file"/></svg> Read bill</button><p id="ocr-status" role="status" aria-live="polite">Choose an image or PDF to send to OCR.Space for reading.</p></div>
+      <section class="ocr-fields" id="ocr-fields" aria-label="Extracted bill details" hidden><h3>Details read from bill</h3><dl id="ocr-field-list"></dl></section>
+      <details class="ocr-review" id="ocr-review" hidden><summary>Show original text detected</summary><pre id="ocr-text"></pre></details>
+      <p class="form-note">The selected file is sent to OCR.Space for text extraction. Confirm every value against the bill before saving; the original attachment remains in this browser.</p>
+      <div class="modal-actions"><button class="button button-outline" type="button" data-close="record-dialog">Cancel</button><button class="button button-dark" id="record-save" type="submit">Save this bill</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="letter-dialog" class="modal letter-modal">
+    <form id="letter-form" class="modal-form">
+      <div class="modal-heading"><div><p class="eyebrow">EDIT BEFORE YOU SEND</p><h2>Concern letter draft</h2></div><button class="icon-button" type="button" data-close="letter-dialog" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div>
+      <p class="form-note">Check the provider, dates, account number, and amounts. This draft is not sent automatically.</p>
+      <label class="field"><span>Letter</span><textarea id="letter-text" rows="19" required></textarea></label>
+      <div class="modal-actions modal-actions-wide"><button class="button button-outline" type="button" id="print-letter">Print / save PDF</button><button class="button button-outline" type="button" id="email-letter">Open email app</button><button class="button button-dark" type="submit">Save draft</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
